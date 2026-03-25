@@ -47,7 +47,6 @@ function initSnakesLadders() {
             cell.textContent = i;
             if (snakes[i]) cell.style.background = '#e74c3c';
             if (ladders[i]) cell.style.background = '#2ecc71';
-            // Mark players on this cell
             const playersHere = players.filter(p => p.position === i);
             if (playersHere.length) {
                 const marker = document.createElement('span');
