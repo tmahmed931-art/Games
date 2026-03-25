@@ -1,10 +1,20 @@
 function initTicTacToe() {
     const container = document.getElementById('tictactoeGame');
-    if (!container) return;
-    if (container.innerHTML.trim() !== '') return;
+    if (!container) {
+        console.warn('Element with id "tictactoeGame" not found');
+        return;
+    }
+
+    // مسح أي محتوى سابق لضمان بدء نظيف
+    container.innerHTML = '';
+
+    // نص افتراضي في حال عدم وجود كائن اللغة
+    const backText = (typeof lang !== 'undefined' && lang[currentLang] && lang[currentLang].back_home) 
+                     ? lang[currentLang].back_home 
+                     : 'الرئيسية';
 
     container.innerHTML = `
-        <button class="back-home-btn" id="tttBackBtn"><i class="fas fa-arrow-right"></i> ${lang[currentLang].back_home}</button>
+        <button class="back-home-btn" id="tttBackBtn"><i class="fas fa-arrow-right"></i> ${backText}</button>
         <div class="panel-title"><i class="fas fa-grip-lines"></i> إكس أو (Tic Tac Toe)</div>
         <div id="tttBoard" class="ttt-board"></div>
         <div id="tttStatus" class="result-card"></div>
@@ -12,7 +22,10 @@ function initTicTacToe() {
     `;
 
     const backBtn = document.getElementById('tttBackBtn');
-    if (backBtn) backBtn.addEventListener('click', () => window.showMainPage());
+    if (backBtn) backBtn.addEventListener('click', () => {
+        if (typeof window.showMainPage === 'function') window.showMainPage();
+        else console.warn('showMainPage not defined');
+    });
 
     let board = Array(9).fill(null);
     let currentPlayer = 'X';
@@ -75,4 +88,12 @@ function initTicTacToe() {
     if (resetBtn) resetBtn.addEventListener('click', resetGame);
     resetGame();
 }
+
+// استدعاء الدالة عند تحميل الصفحة
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTicTacToe);
+} else {
+    initTicTacToe();
+}
+
 window.initTicTacToe = initTicTacToe;
