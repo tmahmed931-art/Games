@@ -38,7 +38,6 @@ function initConnect4() {
 
     function makeMove(col) {
         if (!gameActive) return;
-        // Find the lowest empty row in this column
         for (let r = rows - 1; r >= 0; r--) {
             if (board[r][col] === null) {
                 board[r][col] = currentPlayer;
@@ -64,14 +63,12 @@ function initConnect4() {
         const directions = [[0,1],[1,0],[1,1],[1,-1]];
         for (let [dr, dc] of directions) {
             let count = 1;
-            // positive direction
             for (let step = 1; step <= 3; step++) {
                 const nr = row + dr * step, nc = col + dc * step;
                 if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) break;
                 if (board[nr][nc] === currentPlayer) count++;
                 else break;
             }
-            // negative direction
             for (let step = 1; step <= 3; step++) {
                 const nr = row - dr * step, nc = col - dc * step;
                 if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) break;
