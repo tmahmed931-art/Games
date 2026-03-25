@@ -11,8 +11,8 @@ const lang = {
         game_truth_desc: "أسئلة وأوامر عشوائية",
         game_rps: "حجر ورقة مقص",
         game_rps_desc: "واجه الحاسوب",
-        game_trivia: "سؤال وجواب",
-        game_trivia_desc: "اختبر معلوماتك",
+        game_wyrm: "ماذا تفضل؟",
+        game_wyrm_desc: "اختر بين خيارين",
         back_home: "العودة للقائمة"
     },
     en: {
@@ -26,8 +26,8 @@ const lang = {
         game_truth_desc: "Random questions and challenges",
         game_rps: "Rock Paper Scissors",
         game_rps_desc: "Play against computer",
-        game_trivia: "Quick Trivia",
-        game_trivia_desc: "Test your knowledge",
+        game_wyrm: "Would You Rather",
+        game_wyrm_desc: "Choose between two options",
         back_home: "Back to Menu"
     }
 };
@@ -49,14 +49,14 @@ function setLanguage(langCode) {
     document.body.dir = langCode === 'ar' ? 'rtl' : 'ltr';
 }
 
-// Navigation between pages
+// Navigation
 const mainPage = document.getElementById('mainPage');
 const gameContainers = {
     mafia: document.getElementById('mafiaGame'),
     dice: document.getElementById('diceGame'),
     truth: document.getElementById('truthGame'),
     rps: document.getElementById('rpsGame'),
-    trivia: document.getElementById('triviaGame')
+    wyrm: document.getElementById('wyrmGame')
 };
 
 function showGame(gameId) {
@@ -66,12 +66,12 @@ function showGame(gameId) {
     }
     gameContainers[gameId].style.display = 'block';
 
-    // Initialize game if not yet
+    // Initialize if not yet
     if (gameId === 'mafia' && typeof initMafia === 'function') initMafia();
     if (gameId === 'truth' && typeof initTruthDare === 'function') initTruthDare();
     if (gameId === 'dice' && typeof initDice === 'function') initDice();
     if (gameId === 'rps' && typeof initRPS === 'function') initRPS();
-    if (gameId === 'trivia' && typeof initTrivia === 'function') initTrivia();
+    if (gameId === 'wyrm' && typeof initWyrm === 'function') initWyrm();
 }
 
 function showMainPage() {
@@ -79,9 +79,9 @@ function showMainPage() {
     for (let id in gameContainers) {
         gameContainers[id].style.display = 'none';
     }
-    // Remove any overlays
-    const overlay = document.querySelector('.overlay-modal');
-    if (overlay) overlay.remove();
+    // Remove any lingering overlays
+    const overlays = document.querySelectorAll('.overlay-modal');
+    overlays.forEach(o => o.remove());
 }
 
 // Event listeners
@@ -95,9 +95,7 @@ document.querySelectorAll('.game-card').forEach(card => {
 document.getElementById('langAr').addEventListener('click', () => setLanguage('ar'));
 document.getElementById('langEn').addEventListener('click', () => setLanguage('en'));
 
-// Expose functions globally
 window.showMainPage = showMainPage;
 window.setLanguage = setLanguage;
 
-// Set default language
 setLanguage('ar');
