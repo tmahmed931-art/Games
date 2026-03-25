@@ -2,27 +2,27 @@ function initColorMemory() {
     const container = document.getElementById('colormemoryGame');
     if (container.innerHTML.trim() !== '') return;
 
-    // إضافة أنماط CSS محسنة لجعل الألوان أكثر نعومة وجاذبية
+    // أنماط CSS محسنة مع تأثير ضغط واضح
     if (!document.getElementById('cm-enhanced-styles')) {
         const style = document.createElement('style');
         style.id = 'cm-enhanced-styles';
         style.textContent = `
             .color-btn {
-                transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.1s ease;
+                transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.08s ease;
                 cursor: pointer;
-                border-radius: 16px;
+                border-radius: 20px;
                 box-shadow: 0 8px 15px rgba(0,0,0,0.2);
             }
             .color-btn:hover {
-                transform: scale(1.03);
-                box-shadow: 0 12px 20px rgba(0,0,0,0.25);
+                transform: scale(1.02);
                 filter: brightness(1.02);
             }
+            /* تأثير الضغط القوي - واضح جداً */
             .color-btn.active {
-                transform: scale(0.97);
-                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-                filter: brightness(1.2);
-                transition: transform 0.05s, filter 0.05s;
+                transform: scale(0.92) !important;
+                box-shadow: 0 0 0 3px white, 0 0 0 6px rgba(255,255,255,0.5), 0 4px 8px rgba(0,0,0,0.2) !important;
+                filter: brightness(0.85) !important;
+                transition: transform 0.05s, box-shadow 0.05s, filter 0.05s;
             }
             #cmSequence {
                 display: flex;
@@ -85,16 +85,10 @@ function initColorMemory() {
 
     document.getElementById('cmBackBtn').addEventListener('click', () => window.showMainPage());
 
-    // --- مجموعة ألوان أكثر جاذبية ووضوح (8 ألوان نقية) ---
+    // مجموعة ألوان أكثر جاذبية (8 ألوان)
     const colors = [
-        '#e74c3c', // أحمر ناصع
-        '#2ecc71', // أخضر زمردي
-        '#3498db', // أزرق سماوي
-        '#f1c40f', // ذهبي
-        '#9b59b6', // بنفسجي عميق
-        '#1abc9c', // فيروزي
-        '#e67e22', // برتقالي
-        '#e84393'  // وردي فاقع
+        '#e74c3c', '#2ecc71', '#3498db', '#f1c40f',
+        '#9b59b6', '#1abc9c', '#e67e22', '#e84393'
     ];
     
     let sequence = [];
@@ -102,41 +96,42 @@ function initColorMemory() {
     let playerIndex = 0;
     let level = 1;
     let gameActive = false;
-    let currentInterval = null;      // لتتبع المؤقت وتجنب التداخل
+    let currentInterval = null;
     let highScore = 0;
 
-    // تحميل الرقم القياسي من localStorage
+    // تحميل الرقم القياسي
     function loadHighScore() {
         const saved = localStorage.getItem('colorMemoryHighScore');
-        if (saved && !isNaN(parseInt(saved))) {
-            highScore = parseInt(saved);
-        } else {
-            highScore = 0;
-        }
+        highScore = saved && !isNaN(parseInt(saved)) ? parseInt(saved) : 0;
         document.getElementById('highScoreValue').innerText = highScore;
     }
     loadHighScore();
 
-    // تحديث الرقم القياسي إذا تم كسر الرقم
     function updateHighScore(currentLevel) {
         if (currentLevel > highScore) {
             highScore = currentLevel;
             localStorage.setItem('colorMemoryHighScore', highScore);
             document.getElementById('highScoreValue').innerText = highScore;
-            // تأثير بسيط للاحتفال
             const hsDiv = document.getElementById('cmHighScore');
             hsDiv.style.transform = 'scale(1.05)';
             setTimeout(() => { hsDiv.style.transform = ''; }, 300);
         }
     }
 
-    // حساب سرعة ظهور التسلسل حسب المستوى (تزداد مع كل مستوى)
     function getSequenceDelay() {
-        let delay = 700 - (level - 1) * 30;   // 700ms في المستوى1، تنقص 30ms لكل مستوى
-        return Math.max(250, delay);          // لا تقل عن 250ms للحفاظ على التحدي المناسب
+        let delay = 700 - (level - 1) * 30;
+        return Math.max(250, delay);
     }
 
-    // عرض التسلسل للمستخدم بسرعة متغيرة
+    // إضافة تأثير ضغط فوري للزر عند النقر (لرد فعل واضح)
+    function flashButton(btn) {
+        if (!btn) return;
+        btn.classList.add('active');
+        setTimeout(() => {
+            btn.classList.remove('active');
+        }, 150);
+    }
+
     function showSequence() {
         if (currentInterval) {
             clearInterval(currentInterval);
@@ -157,14 +152,14 @@ function initColorMemory() {
             }
             const btn = document.querySelector(`.color-btn[data-color="${sequence[i]}"]`);
             if (btn) {
+                // تأثير واضح جداً عند ظهور اللون في التسلسل
                 btn.classList.add('active');
-                setTimeout(() => btn.classList.remove('active'), 200); // وميض سريع وناعم
+                setTimeout(() => btn.classList.remove('active'), 200);
             }
             i++;
         }, delay);
     }
 
-    // إضافة لون جديد للتسلسل ورفع المستوى
     function addToSequence() {
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         sequence.push(randomColor);
@@ -172,9 +167,12 @@ function initColorMemory() {
         document.getElementById('cmStatus').innerHTML = `✨ المستوى ${level} ✨ | السرعة: ${Math.round(1000 / getSequenceDelay())} نت/ث`;
     }
 
-    // معالجة الضغط على الزر الملون
     function handleColorClick(color) {
         if (!playerTurn || !gameActive) return;
+        
+        // إضافة تأثير الضغط الفوري على الزر الذي تم النقر عليه
+        const clickedBtn = document.querySelector(`.color-btn[data-color="${color}"]`);
+        flashButton(clickedBtn);
         
         if (color === sequence[playerIndex]) {
             playerIndex++;
@@ -184,44 +182,33 @@ function initColorMemory() {
                 addToSequence();
             }
         } else {
-            // انتهاء اللعبة بسبب خطأ
             gameActive = false;
             if (currentInterval) {
                 clearInterval(currentInterval);
                 currentInterval = null;
             }
-            const message = `❌ خطأ! انتهت اللعبة. وصلت للمستوى ${level}`;
-            document.getElementById('cmMessage').innerHTML = message;
+            document.getElementById('cmMessage').innerHTML = `❌ خطأ! انتهت اللعبة. وصلت للمستوى ${level}`;
             document.getElementById('cmStatus').innerHTML = `⚠️ انتهت! المستوى ${level} ⚠️`;
             document.getElementById('cmStartBtn').disabled = false;
-            
-            // تحديث الرقم القياسي (نخزن أعلى مستوى تم الوصول إليه حتى لو فشل)
             updateHighScore(level);
         }
     }
 
-    // بدء لعبة جديدة
     function startGame() {
-        // إيقاف أي مؤتمر جاري لتجنب التداخل
         if (currentInterval) {
             clearInterval(currentInterval);
             currentInterval = null;
         }
-        // إعادة ضبط المتغيرات
         sequence = [];
         level = 1;
         gameActive = true;
         playerTurn = false;
         playerIndex = 0;
-        
         document.getElementById('cmMessage').innerHTML = '🎮 جاري تحضير التسلسل...';
         document.getElementById('cmStartBtn').disabled = true;
-        
-        // بدء أول تسلسل
         addToSequence();
     }
 
-    // بناء الأزرار الملونة (مع تحسينات بصرية)
     function buildButtons() {
         const seqDiv = document.getElementById('cmSequence');
         seqDiv.innerHTML = '';
@@ -230,7 +217,6 @@ function initColorMemory() {
             btn.className = 'color-btn';
             btn.style.backgroundColor = color;
             btn.setAttribute('data-color', color);
-            btn.setAttribute('aria-label', `لون ${color}`);
             btn.addEventListener('click', () => handleColorClick(color));
             seqDiv.appendChild(btn);
         });
