@@ -1,11 +1,9 @@
-// mafia.js - Full original game logic, adapted for modular loading
+// mafia.js - Full original game logic, rebuilt fresh each time
 function initMafia() {
     const container = document.getElementById('mafiaGame');
-    if (container.innerHTML.trim() !== '') return; // already initialized
-
-    // Inject the HTML structure exactly as before
+    // Always rebuild fresh
     container.innerHTML = `
-        <button class="back-home-btn" id="mafiaBackBtn"><i class="fas fa-arrow-right"></i> العودة للقائمة</button>
+        <button class="back-home-btn" id="mafiaBackBtn"><i class="fas fa-arrow-right"></i> ${lang[currentLang].back_home}</button>
         <div class="mode-selector" id="modeSelector">
             <div class="mode-card" data-mode="leader">
                 <h3><i class="fas fa-crown"></i> قيادة الصقور</h3>
