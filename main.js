@@ -1,7 +1,7 @@
 // Language strings
 const lang = {
     ar: {
-        site_name: "Mafia",
+        site_name: "Deep Games",
         tagline: "مجموعة ألعاب جماعية ممتعة",
         game_mafia: "مافيا",
         game_mafia_desc: "لعبة الأدوار الكلاسيكية",
@@ -19,10 +19,27 @@ const lang = {
         game_connect4_desc: "أربع علامات متتالية",
         game_memory: "تطابق الذاكرة",
         game_memory_desc: "طابق الأزواج المتشابهة",
+        // الألعاب الجديدة
+        game_colormemory: "تحدي الذاكرة بالألوان",
+        game_colormemory_desc: "تذكر تسلسل الألوان",
+        game_quizrace: "سباق الأسئلة",
+        game_quizrace_desc: "أسئلة عامة مع مؤقت",
+        game_snakesladders: "السلم والثعبان",
+        game_snakesladders_desc: "لعبة الألواح الكلاسيكية",
+        game_speedclick: "تحدي السرعة",
+        game_speedclick_desc: "اضغط على الأهداف سريعاً",
+        game_numbermatch: "تطابق الأرقام",
+        game_numbermatch_desc: "طابق العملية مع النتيجة",
+        game_drawguess: "ارسم وخمّن",
+        game_drawguess_desc: "ارسم الكلمة ليخمنها الآخرون",
+        game_wordchain: "سلسلة الكلمات",
+        game_wordchain_desc: "كلمة تبدأ بآخر حرف",
+        game_monopoly: "بنك الحظ",
+        game_monopoly_desc: "نسخة مبسطة من مونوبولي",
         back_home: "العودة للقائمة"
     },
     en: {
-        site_name: "Mafia",
+        site_name: "Deep Games",
         tagline: "Fun party games collection",
         game_mafia: "Mafia",
         game_mafia_desc: "Classic role-playing game",
@@ -40,6 +57,23 @@ const lang = {
         game_connect4_desc: "Get four in a row",
         game_memory: "Memory Match",
         game_memory_desc: "Match the pairs",
+        // new games
+        game_colormemory: "Color Memory",
+        game_colormemory_desc: "Remember the color sequence",
+        game_quizrace: "Quiz Race",
+        game_quizrace_desc: "General knowledge with timer",
+        game_snakesladders: "Snakes & Ladders",
+        game_snakesladders_desc: "Classic board game",
+        game_speedclick: "Speed Click",
+        game_speedclick_desc: "Click targets quickly",
+        game_numbermatch: "Number Match",
+        game_numbermatch_desc: "Match equation with result",
+        game_drawguess: "Draw & Guess",
+        game_drawguess_desc: "Draw the word for others to guess",
+        game_wordchain: "Word Chain",
+        game_wordchain_desc: "Word starting with last letter",
+        game_monopoly: "Luck Bank",
+        game_monopoly_desc: "Simplified Monopoly",
         back_home: "Back to Menu"
     }
 };
@@ -71,7 +105,15 @@ const gameContainers = {
     wyrm: document.getElementById('wyrmGame'),
     tictactoe: document.getElementById('tictactoeGame'),
     connect4: document.getElementById('connect4Game'),
-    memory: document.getElementById('memoryGame')
+    memory: document.getElementById('memoryGame'),
+    colormemory: document.getElementById('colormemoryGame'),
+    quizrace: document.getElementById('quizraceGame'),
+    snakesladders: document.getElementById('snakesladdersGame'),
+    speedclick: document.getElementById('speedclickGame'),
+    numbermatch: document.getElementById('numbermatchGame'),
+    drawguess: document.getElementById('drawguessGame'),
+    wordchain: document.getElementById('wordchainGame'),
+    monopoly: document.getElementById('monopolyGame')
 };
 
 function showGame(gameId) {
@@ -83,7 +125,7 @@ function showGame(gameId) {
     gameContainer.style.display = 'block';
     gameContainer.setAttribute('data-game', gameId);
 
-    // Initialize if not yet
+    // Initialize games
     if (gameId === 'mafia' && typeof initMafia === 'function') initMafia();
     if (gameId === 'truth' && typeof initTruthDare === 'function') initTruthDare();
     if (gameId === 'dice' && typeof initDice === 'function') initDice();
@@ -92,6 +134,14 @@ function showGame(gameId) {
     if (gameId === 'tictactoe' && typeof initTicTacToe === 'function') initTicTacToe();
     if (gameId === 'connect4' && typeof initConnect4 === 'function') initConnect4();
     if (gameId === 'memory' && typeof initMemory === 'function') initMemory();
+    if (gameId === 'colormemory' && typeof initColorMemory === 'function') initColorMemory();
+    if (gameId === 'quizrace' && typeof initQuizRace === 'function') initQuizRace();
+    if (gameId === 'snakesladders' && typeof initSnakesLadders === 'function') initSnakesLadders();
+    if (gameId === 'speedclick' && typeof initSpeedClick === 'function') initSpeedClick();
+    if (gameId === 'numbermatch' && typeof initNumberMatch === 'function') initNumberMatch();
+    if (gameId === 'drawguess' && typeof initDrawGuess === 'function') initDrawGuess();
+    if (gameId === 'wordchain' && typeof initWordChain === 'function') initWordChain();
+    if (gameId === 'monopoly' && typeof initMonopoly === 'function') initMonopoly();
 }
 
 function showMainPage() {
