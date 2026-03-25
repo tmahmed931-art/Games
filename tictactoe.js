@@ -1,5 +1,6 @@
 function initTicTacToe() {
     const container = document.getElementById('tictactoeGame');
+    if (!container) return;
     if (container.innerHTML.trim() !== '') return;
 
     container.innerHTML = `
@@ -10,7 +11,8 @@ function initTicTacToe() {
         <button id="tttResetBtn" class="primary">🔄 إعادة اللعبة</button>
     `;
 
-    document.getElementById('tttBackBtn').addEventListener('click', () => window.showMainPage());
+    const backBtn = document.getElementById('tttBackBtn');
+    if (backBtn) backBtn.addEventListener('click', () => window.showMainPage());
 
     let board = Array(9).fill(null);
     let currentPlayer = 'X';
@@ -23,6 +25,7 @@ function initTicTacToe() {
 
     function renderBoard() {
         const boardDiv = document.getElementById('tttBoard');
+        if (!boardDiv) return;
         boardDiv.innerHTML = '';
         for (let i = 0; i < 9; i++) {
             const cell = document.createElement('div');
@@ -39,17 +42,20 @@ function initTicTacToe() {
         renderBoard();
 
         if (checkWin(currentPlayer)) {
-            document.getElementById('tttStatus').innerHTML = `🏆 اللاعب ${currentPlayer} فاز!`;
+            const statusDiv = document.getElementById('tttStatus');
+            if (statusDiv) statusDiv.innerHTML = `🏆 اللاعب ${currentPlayer} فاز!`;
             gameActive = false;
             return;
         }
         if (board.every(cell => cell !== null)) {
-            document.getElementById('tttStatus').innerHTML = `🤝 تعادل!`;
+            const statusDiv = document.getElementById('tttStatus');
+            if (statusDiv) statusDiv.innerHTML = `🤝 تعادل!`;
             gameActive = false;
             return;
         }
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-        document.getElementById('tttStatus').innerHTML = `دور اللاعب ${currentPlayer}`;
+        const statusDiv = document.getElementById('tttStatus');
+        if (statusDiv) statusDiv.innerHTML = `دور اللاعب ${currentPlayer}`;
     }
 
     function checkWin(player) {
@@ -61,10 +67,12 @@ function initTicTacToe() {
         currentPlayer = 'X';
         gameActive = true;
         renderBoard();
-        document.getElementById('tttStatus').innerHTML = `دور اللاعب X`;
+        const statusDiv = document.getElementById('tttStatus');
+        if (statusDiv) statusDiv.innerHTML = `دور اللاعب X`;
     }
 
-    document.getElementById('tttResetBtn').addEventListener('click', resetGame);
+    const resetBtn = document.getElementById('tttResetBtn');
+    if (resetBtn) resetBtn.addEventListener('click', resetGame);
     resetGame();
 }
 window.initTicTacToe = initTicTacToe;
