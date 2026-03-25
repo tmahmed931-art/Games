@@ -64,7 +64,9 @@ function showGame(gameId) {
     for (let id in gameContainers) {
         gameContainers[id].style.display = 'none';
     }
-    gameContainers[gameId].style.display = 'block';
+    const gameContainer = gameContainers[gameId];
+    gameContainer.style.display = 'block';
+    gameContainer.setAttribute('data-game', gameId);
 
     // Initialize if not yet
     if (gameId === 'mafia' && typeof initMafia === 'function') initMafia();
