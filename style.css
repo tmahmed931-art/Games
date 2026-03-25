@@ -99,6 +99,7 @@ body::before {
     border-radius: 2rem;
     cursor: pointer;
     font-size: 0.8rem;
+    transition: all 0.2s;
 }
 
 .lang-btn.active {
@@ -187,13 +188,14 @@ body::before {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    transition: background 0.2s;
 }
 
 .back-home-btn:hover {
     background: #3a4058;
 }
 
-/* Generic game styles */
+/* Common game styles */
 .panel-title {
     font-size: 1.7rem;
     border-right: 5px solid #e4b363;
@@ -252,6 +254,11 @@ button.primary {
     color: #0a0c12;
 }
 
+button.primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 8px rgba(228,179,99,0.4);
+}
+
 .log-area {
     background: #03050b;
     border-radius: 1rem;
@@ -263,41 +270,60 @@ button.primary {
     border: 1px solid #2f354a;
 }
 
-/* Truth or Dare wheel */
-.wheel-container {
-    text-align: center;
-    margin: 1rem 0;
+.players-list {
+    background: rgba(0,0,0,0.4);
+    border-radius: 1.2rem;
+    padding: 0.8rem;
+    max-height: 280px;
+    overflow-y: auto;
 }
-.wheel {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    background: conic-gradient(#e4b363 0deg 120deg, #b57c1c 120deg 240deg, #7a5e2e 240deg 360deg);
-    margin: 0 auto;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.5s ease-out;
+
+.player-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #1b2033;
+    margin: 0.3rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    border-left: 3px solid #e4b363;
 }
-.wheel:active {
-    transform: rotate(0deg);
-}
-.wheel-pointer {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-top: 30px solid #ffcc66;
-    transform: translateX(-50%);
-}
+
 .result-card {
     background: #1b2033;
     border-radius: 1rem;
-    padding: 1rem;
+    padding: 1.5rem;
     margin-top: 1rem;
     font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Truth or Dare specific */
+.truth-dare-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Would You Rather */
+.wyrm-options {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+.wyrm-options button {
+    flex: 1;
+    max-width: 250px;
+    background: #2a2f42;
+    font-size: 1rem;
+    white-space: normal;
+    word-break: break-word;
+}
+.wyrm-options button:hover {
+    background: #3e455e;
 }
 
 /* Responsive */
@@ -305,4 +331,5 @@ button.primary {
     .game-card { width: 100%; max-width: 280px; }
     .lang-toggle { position: static; justify-content: center; margin-top: 1rem; }
     .logo h1 { font-size: 2.2rem; }
+    .wyrm-options { flex-direction: column; align-items: center; }
 }
