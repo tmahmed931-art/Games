@@ -1,10 +1,20 @@
 function initConnect4() {
     const container = document.getElementById('connect4Game');
-    if (!container) return;
-    if (container.innerHTML.trim() !== '') return;
+    if (!container) {
+        console.warn('Element with id "connect4Game" not found');
+        return;
+    }
+
+    // مسح أي محتوى سابق
+    container.innerHTML = '';
+
+    // نص افتراضي في حال عدم وجود كائن اللغة
+    const backText = (typeof lang !== 'undefined' && lang[currentLang] && lang[currentLang].back_home) 
+                     ? lang[currentLang].back_home 
+                     : 'الرئيسية';
 
     container.innerHTML = `
-        <button class="back-home-btn" id="c4BackBtn"><i class="fas fa-arrow-right"></i> ${lang[currentLang].back_home}</button>
+        <button class="back-home-btn" id="c4BackBtn"><i class="fas fa-arrow-right"></i> ${backText}</button>
         <div class="panel-title"><i class="fas fa-circle-dot"></i> أربع في خط (Connect 4)</div>
         <div id="c4Board" class="c4-board"></div>
         <div id="c4Status" class="result-card"></div>
@@ -12,7 +22,10 @@ function initConnect4() {
     `;
 
     const backBtn = document.getElementById('c4BackBtn');
-    if (backBtn) backBtn.addEventListener('click', () => window.showMainPage());
+    if (backBtn) backBtn.addEventListener('click', () => {
+        if (typeof window.showMainPage === 'function') window.showMainPage();
+        else console.warn('showMainPage not defined');
+    });
 
     const rows = 6;
     const cols = 7;
@@ -108,4 +121,5 @@ function initConnect4() {
     if (resetBtn) resetBtn.addEventListener('click', resetGame);
     resetGame();
 }
+
 window.initConnect4 = initConnect4;
