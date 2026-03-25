@@ -11,7 +11,6 @@
 <body>
 <div class="additional-shapes"></div>
 <div class="container">
-    <!-- Header with language toggle -->
     <div class="main-header">
         <div class="logo">
             <i class="fas fa-falcon"></i>
@@ -24,7 +23,6 @@
         <div class="subhead" data-lang-key="tagline">مجموعة ألعاب جماعية ممتعة</div>
     </div>
 
-    <!-- Games Grid -->
     <div id="mainPage">
         <div class="games-grid">
             <div class="game-card" data-game="mafia">
@@ -47,20 +45,19 @@
                 <h3 data-lang-key="game_rps">حجر ورقة مقص</h3>
                 <p data-lang-key="game_rps_desc">واجه الحاسوب</p>
             </div>
-            <div class="game-card" data-game="trivia">
-                <i class="fas fa-brain"></i>
-                <h3 data-lang-key="game_trivia">سؤال وجواب</h3>
-                <p data-lang-key="game_trivia_desc">اختبر معلوماتك</p>
+            <div class="game-card" data-game="wyrm">
+                <i class="fas fa-question-circle"></i>
+                <h3 data-lang-key="game_wyrm">ماذا تفضل؟</h3>
+                <p data-lang-key="game_wyrm_desc">اختر بين خيارين</p>
             </div>
         </div>
     </div>
 
-    <!-- Game Containers (empty, will be filled by JS) -->
     <div id="mafiaGame" class="game-container"></div>
     <div id="diceGame" class="game-container"></div>
     <div id="truthGame" class="game-container"></div>
     <div id="rpsGame" class="game-container"></div>
-    <div id="triviaGame" class="game-container"></div>
+    <div id="wyrmGame" class="game-container"></div>
 </div>
 
 <script src="main.js"></script>
@@ -68,6 +65,6 @@
 <script src="truthDare.js"></script>
 <script src="dice.js"></script>
 <script src="rps.js"></script>
-<script src="trivia.js"></script>
+<script src="wyrm.js"></script>
 </body>
 </html>
