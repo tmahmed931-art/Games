@@ -27,7 +27,13 @@ function initMemory() {
     }
 
     function initGame() {
-        cards = shuffle([...emojis, ...emojis]).map((emoji, idx) => ({ id: idx, emoji, matched: false, flipped: false }));
+        // Create cards: each emoji appears twice
+        let deck = [];
+        emojis.forEach(emoji => {
+            deck.push({ emoji, matched: false, flipped: false });
+            deck.push({ emoji, matched: false, flipped: false });
+        });
+        cards = shuffle(deck);
         flippedIndices = [];
         lockBoard = false;
         matchedPairs = 0;
