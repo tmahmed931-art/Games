@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Mafia | ألعاب جماعية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700;800&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="additional-shapes"></div>
+<div class="container">
+    <!-- Header with language toggle -->
+    <div class="main-header">
+        <div class="logo">
+            <i class="fas fa-falcon"></i>
+            <h1 data-lang-key="site_name">Mafia</h1>
+        </div>
+        <div class="lang-toggle">
+            <button id="langAr" class="lang-btn active">العربية</button>
+            <button id="langEn" class="lang-btn">English</button>
+        </div>
+        <div class="subhead" data-lang-key="tagline">مجموعة ألعاب جماعية ممتعة</div>
+    </div>
+
+    <!-- Games Grid -->
+    <div id="mainPage">
+        <div class="games-grid">
+            <div class="game-card" data-game="mafia">
+                <i class="fas fa-mask"></i>
+                <h3 data-lang-key="game_mafia">مافيا</h3>
+                <p data-lang-key="game_mafia_desc">لعبة الأدوار الكلاسيكية</p>
+            </div>
+            <div class="game-card" data-game="dice">
+                <i class="fas fa-dice-d6"></i>
+                <h3 data-lang-key="game_dice">مباراة النرد</h3>
+                <p data-lang-key="game_dice_desc">نرد سريع للاعبين</p>
+            </div>
+            <div class="game-card" data-game="truth">
+                <i class="fas fa-comment-dots"></i>
+                <h3 data-lang-key="game_truth">حقيقة أو جرأة</h3>
+                <p data-lang-key="game_truth_desc">أسئلة وأوامر عشوائية</p>
+            </div>
+            <div class="game-card" data-game="rps">
+                <i class="fas fa-hand-rock"></i>
+                <h3 data-lang-key="game_rps">حجر ورقة مقص</h3>
+                <p data-lang-key="game_rps_desc">واجه الحاسوب</p>
+            </div>
+            <div class="game-card" data-game="trivia">
+                <i class="fas fa-brain"></i>
+                <h3 data-lang-key="game_trivia">سؤال وجواب</h3>
+                <p data-lang-key="game_trivia_desc">اختبر معلوماتك</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Containers (empty, will be filled by JS) -->
+    <div id="mafiaGame" class="game-container"></div>
+    <div id="diceGame" class="game-container"></div>
+    <div id="truthGame" class="game-container"></div>
+    <div id="rpsGame" class="game-container"></div>
+    <div id="triviaGame" class="game-container"></div>
+</div>
+
+<script src="main.js"></script>
+<script src="mafia.js"></script>
+<script src="truthDare.js"></script>
+<script src="dice.js"></script>
+<script src="rps.js"></script>
+<script src="trivia.js"></script>
+</body>
+</html>
