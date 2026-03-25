@@ -326,6 +326,62 @@ button.primary:hover {
     background: #3e455e;
 }
 
+/* ========== Per-Game Themes ========== */
+.game-container[data-game="mafia"] {
+    border-color: #b22234;
+    background: linear-gradient(135deg, rgba(10,10,20,0.85), rgba(30,20,30,0.85));
+}
+.game-container[data-game="mafia"] .panel-title {
+    border-right-color: #b22234;
+}
+.game-container[data-game="mafia"] .primary {
+    background: linear-gradient(95deg, #b22234, #8b0000);
+}
+
+.game-container[data-game="dice"] {
+    border-color: #2e8b57;
+    background: linear-gradient(135deg, rgba(20,30,20,0.85), rgba(10,25,15,0.85));
+}
+.game-container[data-game="dice"] .panel-title {
+    border-right-color: #2e8b57;
+}
+.game-container[data-game="dice"] .primary {
+    background: linear-gradient(95deg, #2e8b57, #1c6e3a);
+}
+
+.game-container[data-game="truth"] {
+    border-color: #9b59b6;
+    background: linear-gradient(135deg, rgba(30,20,40,0.85), rgba(20,10,35,0.85));
+}
+.game-container[data-game="truth"] .panel-title {
+    border-right-color: #9b59b6;
+}
+.game-container[data-game="truth"] .primary {
+    background: linear-gradient(95deg, #9b59b6, #8e44ad);
+}
+
+.game-container[data-game="rps"] {
+    border-color: #e67e22;
+    background: linear-gradient(135deg, rgba(40,25,15,0.85), rgba(30,20,10,0.85));
+}
+.game-container[data-game="rps"] .panel-title {
+    border-right-color: #e67e22;
+}
+.game-container[data-game="rps"] .primary {
+    background: linear-gradient(95deg, #e67e22, #d35400);
+}
+
+.game-container[data-game="wyrm"] {
+    border-color: #1abc9c;
+    background: linear-gradient(135deg, rgba(20,40,35,0.85), rgba(15,30,25,0.85));
+}
+.game-container[data-game="wyrm"] .panel-title {
+    border-right-color: #1abc9c;
+}
+.game-container[data-game="wyrm"] .primary {
+    background: linear-gradient(95deg, #1abc9c, #16a085);
+}
+
 /* Responsive */
 @media (max-width: 700px) {
     .game-card { width: 100%; max-width: 280px; }
