@@ -1,5 +1,6 @@
 function initConnect4() {
     const container = document.getElementById('connect4Game');
+    if (!container) return;
     if (container.innerHTML.trim() !== '') return;
 
     container.innerHTML = `
@@ -10,7 +11,8 @@ function initConnect4() {
         <button id="c4ResetBtn" class="primary">🔄 إعادة اللعبة</button>
     `;
 
-    document.getElementById('c4BackBtn').addEventListener('click', () => window.showMainPage());
+    const backBtn = document.getElementById('c4BackBtn');
+    if (backBtn) backBtn.addEventListener('click', () => window.showMainPage());
 
     const rows = 6;
     const cols = 7;
@@ -20,6 +22,7 @@ function initConnect4() {
 
     function renderBoard() {
         const boardDiv = document.getElementById('c4Board');
+        if (!boardDiv) return;
         boardDiv.innerHTML = '';
         for (let r = 0; r < rows; r++) {
             const rowDiv = document.createElement('div');
@@ -38,25 +41,27 @@ function initConnect4() {
 
     function makeMove(col) {
         if (!gameActive) return;
-        // Find the lowest empty row in this column
         for (let r = rows - 1; r >= 0; r--) {
             if (board[r][col] === null) {
                 board[r][col] = currentPlayer;
                 renderBoard();
                 if (checkWin(r, col)) {
                     const winnerName = currentPlayer === 'red' ? 'الأحمر' : 'الأصفر';
-                    document.getElementById('c4Status').innerHTML = `🏆 اللاعب ${winnerName} فاز!`;
+                    const statusDiv = document.getElementById('c4Status');
+                    if (statusDiv) statusDiv.innerHTML = `🏆 اللاعب ${winnerName} فاز!`;
                     gameActive = false;
                     return;
                 }
                 if (isBoardFull()) {
-                    document.getElementById('c4Status').innerHTML = `🤝 تعادل!`;
+                    const statusDiv = document.getElementById('c4Status');
+                    if (statusDiv) statusDiv.innerHTML = `🤝 تعادل!`;
                     gameActive = false;
                     return;
                 }
                 currentPlayer = currentPlayer === 'red' ? 'yellow' : 'red';
                 const nextPlayer = currentPlayer === 'red' ? 'الأحمر' : 'الأصفر';
-                document.getElementById('c4Status').innerHTML = `دور اللاعب ${nextPlayer}`;
+                const statusDiv = document.getElementById('c4Status');
+                if (statusDiv) statusDiv.innerHTML = `دور اللاعب ${nextPlayer}`;
                 return;
             }
         }
@@ -66,14 +71,12 @@ function initConnect4() {
         const directions = [[0,1],[1,0],[1,1],[1,-1]];
         for (let [dr, dc] of directions) {
             let count = 1;
-            // positive direction
             for (let step = 1; step <= 3; step++) {
                 const nr = row + dr * step, nc = col + dc * step;
                 if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) break;
                 if (board[nr][nc] === currentPlayer) count++;
                 else break;
             }
-            // negative direction
             for (let step = 1; step <= 3; step++) {
                 const nr = row - dr * step, nc = col - dc * step;
                 if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) break;
@@ -97,10 +100,12 @@ function initConnect4() {
         currentPlayer = 'red';
         gameActive = true;
         renderBoard();
-        document.getElementById('c4Status').innerHTML = `دور اللاعب الأحمر`;
+        const statusDiv = document.getElementById('c4Status');
+        if (statusDiv) statusDiv.innerHTML = `دور اللاعب الأحمر`;
     }
 
-    document.getElementById('c4ResetBtn').addEventListener('click', resetGame);
+    const resetBtn = document.getElementById('c4ResetBtn');
+    if (resetBtn) resetBtn.addEventListener('click', resetGame);
     resetGame();
 }
 window.initConnect4 = initConnect4;
