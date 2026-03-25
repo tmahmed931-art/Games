@@ -1,5 +1,6 @@
 function initMemory() {
     const container = document.getElementById('memoryGame');
+    if (!container) return;
     if (container.innerHTML.trim() !== '') return;
 
     container.innerHTML = `
@@ -10,7 +11,8 @@ function initMemory() {
         <button id="memoryResetBtn" class="primary">🔄 إعادة اللعبة</button>
     `;
 
-    document.getElementById('memBackBtn').addEventListener('click', () => window.showMainPage());
+    const backBtn = document.getElementById('memBackBtn');
+    if (backBtn) backBtn.addEventListener('click', () => window.showMainPage());
 
     const emojis = ['🐱', '🐶', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼'];
     let cards = [];
@@ -27,7 +29,6 @@ function initMemory() {
     }
 
     function initGame() {
-        // Create cards: each emoji appears twice
         let deck = [];
         emojis.forEach(emoji => {
             deck.push({ emoji, matched: false, flipped: false });
@@ -38,11 +39,13 @@ function initMemory() {
         lockBoard = false;
         matchedPairs = 0;
         renderBoard();
-        document.getElementById('memoryStatus').innerHTML = `ابحث عن الأزواج المتطابقة!`;
+        const statusDiv = document.getElementById('memoryStatus');
+        if (statusDiv) statusDiv.innerHTML = `ابحث عن الأزواج المتطابقة!`;
     }
 
     function renderBoard() {
         const boardDiv = document.getElementById('memoryBoard');
+        if (!boardDiv) return;
         boardDiv.innerHTML = '';
         cards.forEach((card, idx) => {
             const cardDiv = document.createElement('div');
@@ -66,8 +69,8 @@ function initMemory() {
 
         card.flipped = true;
         renderBoard();
-
         flippedIndices.push(index);
+
         if (flippedIndices.length === 2) {
             lockBoard = true;
             checkMatch();
@@ -87,7 +90,8 @@ function initMemory() {
             lockBoard = false;
             renderBoard();
             if (matchedPairs === emojis.length) {
-                document.getElementById('memoryStatus').innerHTML = `🎉 لقد فزت! أكملت جميع الأزواج. 🎉`;
+                const statusDiv = document.getElementById('memoryStatus');
+                if (statusDiv) statusDiv.innerHTML = `🎉 لقد فزت! أكملت جميع الأزواج. 🎉`;
             }
         } else {
             setTimeout(() => {
@@ -104,7 +108,8 @@ function initMemory() {
         initGame();
     }
 
-    document.getElementById('memoryResetBtn').addEventListener('click', resetGame);
+    const resetBtn = document.getElementById('memoryResetBtn');
+    if (resetBtn) resetBtn.addEventListener('click', resetGame);
     initGame();
 }
 window.initMemory = initMemory;
