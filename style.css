@@ -116,6 +116,39 @@ body::before {
     margin-top: 0.5rem;
 }
 
+/* Tabs */
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin: 1.5rem 0;
+}
+
+.tab-btn {
+    background: rgba(12, 15, 24, 0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(228, 179, 99, 0.4);
+    border-radius: 2rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #e4b363;
+}
+
+.tab-btn.active {
+    background: #e4b363;
+    color: #0a0c12;
+    border-color: #e4b363;
+}
+
+.tab-btn:hover {
+    background: #e4b363;
+    color: #0a0c12;
+}
+
 .games-grid {
     display: flex;
     justify-content: center;
@@ -326,7 +359,7 @@ button.primary:hover {
     background: #3e455e;
 }
 
-/* ========== Per-Game Themes (existing) ========== */
+/* ========== Per-Game Themes (existing and new) ========== */
 .game-container[data-game="mafia"] {
     border-color: #b22234;
     background: linear-gradient(135deg, rgba(10,10,20,0.85), rgba(30,20,30,0.85));
@@ -415,7 +448,6 @@ button.primary:hover {
     background: linear-gradient(95deg, #e91e63, #c2185b);
 }
 
-/* ========== Styles for new games ========== */
 .game-container[data-game="colormemory"] {
     border-color: #ff6b6b;
     background: linear-gradient(135deg, rgba(50,30,30,0.85), rgba(40,20,20,0.85));
@@ -504,140 +536,77 @@ button.primary:hover {
     background: linear-gradient(95deg, #e74c3c, #c0392b);
 }
 
-/* أنماط خاصة بالألعاب الجديدة */
-.color-sequence {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin: 1rem 0;
+/* أنماط الألعاب الجديدة */
+.game-container[data-game="penalty"] {
+    border-color: #2ecc71;
+    background: linear-gradient(135deg, rgba(30,50,30,0.85), rgba(20,40,20,0.85));
 }
-.color-btn {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid #fff;
-    transition: 0.1s;
+.game-container[data-game="footballCoach"] {
+    border-color: #f39c12;
+    background: linear-gradient(135deg, rgba(50,40,20,0.85), rgba(40,30,15,0.85));
 }
-.color-btn.active {
-    transform: scale(0.95);
-    filter: brightness(0.8);
+.game-container[data-game="goalkeeper"] {
+    border-color: #e67e22;
+    background: linear-gradient(135deg, rgba(50,35,20,0.85), rgba(40,25,15,0.85));
 }
-.quiz-question {
-    font-size: 1.4rem;
-    margin: 1rem 0;
+.game-container[data-game="footballTicTacToe"] {
+    border-color: #e74c3c;
+    background: linear-gradient(135deg, rgba(50,30,30,0.85), rgba(40,20,20,0.85));
 }
-.quiz-options {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-    margin: 1rem 0;
+.game-container[data-game="footballQuiz"] {
+    border-color: #3498db;
+    background: linear-gradient(135deg, rgba(30,40,50,0.85), rgba(20,30,40,0.85));
 }
-.sl-board {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 2px;
-    background: #0f1220;
-    padding: 0.5rem;
-    border-radius: 1rem;
-    margin: 1rem auto;
-    max-width: 500px;
+.game-container[data-game="f1TimeTrial"] {
+    border-color: #e74c3c;
+    background: linear-gradient(135deg, rgba(50,30,30,0.85), rgba(40,20,20,0.85));
 }
-.sl-cell {
-    aspect-ratio: 1;
-    background: #1b2033;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    position: relative;
+.game-container[data-game="f1Pitstop"] {
+    border-color: #f1c40f;
+    background: linear-gradient(135deg, rgba(50,45,20,0.85), rgba(40,35,15,0.85));
 }
-.sl-player {
-    position: absolute;
-    font-size: 1.2rem;
-    bottom: 0;
-    right: 0;
+.game-container[data-game="f1MemoryRace"] {
+    border-color: #9b59b6;
+    background: linear-gradient(135deg, rgba(40,30,50,0.85), rgba(30,20,40,0.85));
 }
-.speed-target {
-    width: 120px;
-    height: 120px;
-    background: #e74c3c;
-    border-radius: 50%;
-    margin: 1rem auto;
-    cursor: pointer;
-    transition: 0.05s linear;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
+.game-container[data-game="f1Quiz"] {
+    border-color: #1abc9c;
+    background: linear-gradient(135deg, rgba(30,50,40,0.85), rgba(20,40,30,0.85));
 }
-.number-match-board {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    max-width: 500px;
-    margin: 1rem auto;
+.game-container[data-game="guessGame"] {
+    border-color: #e91e63;
+    background: linear-gradient(135deg, rgba(50,20,40,0.85), rgba(40,15,30,0.85));
 }
-.number-match-card {
-    aspect-ratio: 1;
-    background: #1b2033;
-    border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    cursor: pointer;
+.game-container[data-game="characterMatch"] {
+    border-color: #3498db;
+    background: linear-gradient(135deg, rgba(30,40,60,0.85), rgba(20,30,50,0.85));
 }
-.draw-canvas {
-    background: white;
-    border-radius: 1rem;
-    margin: 1rem auto;
-    display: block;
-    cursor: crosshair;
+.game-container[data-game="gamerQuiz"] {
+    border-color: #f39c12;
+    background: linear-gradient(135deg, rgba(50,40,20,0.85), rgba(40,30,15,0.85));
 }
-.word-chain-input {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
+.game-container[data-game="consoleClicker"] {
+    border-color: #2ecc71;
+    background: linear-gradient(135deg, rgba(30,50,30,0.85), rgba(20,40,20,0.85));
 }
-.monopoly-board {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-    background: #0f1220;
-    padding: 0.5rem;
-    border-radius: 1rem;
+.game-container[data-game="guessFlag"] {
+    border-color: #f1c40f;
+    background: linear-gradient(135deg, rgba(50,45,20,0.85), rgba(40,35,15,0.85));
 }
-.monopoly-cell {
-    background: #2c3e50;
-    padding: 0.5rem;
-    text-align: center;
-    border-radius: 0.5rem;
-    font-size: 0.8rem;
+.game-container[data-game="matchCapitals"] {
+    border-color: #9b59b6;
+    background: linear-gradient(135deg, rgba(40,30,50,0.85), rgba(30,20,40,0.85));
+}
+.game-container[data-game="flagQuiz"] {
+    border-color: #e67e22;
+    background: linear-gradient(135deg, rgba(50,35,20,0.85), rgba(40,25,15,0.85));
+}
+.game-container[data-game="flagRace"] {
+    border-color: #e74c3c;
+    background: linear-gradient(135deg, rgba(50,30,30,0.85), rgba(40,20,20,0.85));
 }
 
-.footer-credit {
-    text-align: center;
-    margin-top: 2rem;
-    padding: 1rem;
-    color: #e4b363;
-    border-top: 1px solid rgba(228,179,99,0.3);
-    font-size: 0.9rem;
-}
-
-/* Responsive */
-@media (max-width: 700px) {
-    .game-card { width: 100%; max-width: 280px; }
-    .lang-toggle { position: static; justify-content: center; margin-top: 1rem; }
-    .logo h1 { font-size: 2.2rem; }
-    .wyrm-options { flex-direction: column; align-items: center; }
-    .quiz-options { grid-template-columns: 1fr; }
-    .sl-board { gap: 1px; }
-    .sl-cell { font-size: 0.6rem; }
-    .color-btn { width: 50px; height: 50px; }
-}
-
-/* ========== Tic Tac Toe Board Styles ========== */
+/* تنسيقات الألعاب المشتركة */
 .ttt-board {
     display: grid;
     grid-template-columns: repeat(3, minmax(80px, 100px));
@@ -648,7 +617,6 @@ button.primary:hover {
     padding: 10px;
     border-radius: 1rem;
 }
-
 .ttt-cell {
     aspect-ratio: 1 / 1;
     background: rgba(20, 30, 50, 0.9);
@@ -662,34 +630,11 @@ button.primary:hover {
     color: #e4b363;
     cursor: pointer;
     transition: all 0.2s ease;
-    backdrop-filter: blur(4px);
 }
-
 .ttt-cell:hover {
     background: rgba(52, 152, 219, 0.3);
     transform: scale(1.02);
-    border-color: #e4b363;
 }
-
-/* تنسيق زر الإعادة ليتناسب مع لون اللعبة */
-.game-container[data-game="tictactoe"] #tttResetBtn {
-    background: linear-gradient(95deg, #3498db, #2980b9);
-    color: white;
-    margin-top: 1rem;
-    width: auto;
-    display: inline-flex;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* تنسيق شريط الحالة */
-.game-container[data-game="tictactoe"] .result-card {
-    background: rgba(52, 152, 219, 0.2);
-    border: 1px solid #3498db;
-    color: #e4b363;
-}
-
-/* ========== Connect 4 Board Styles ========== */
 .c4-board {
     display: flex;
     flex-direction: column;
@@ -700,53 +645,103 @@ button.primary:hover {
     border-radius: 1.5rem;
     margin: 20px auto;
     width: fit-content;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
-
 .c4-row {
     display: flex;
     gap: 5px;
-    justify-content: center;
 }
-
 .c4-cell {
     width: 50px;
     height: 50px;
     background: #2a2f42;
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: inset 0 0 0 2px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.3);
 }
-
 .c4-cell.red {
     background: radial-gradient(circle at 30% 30%, #e74c3c, #c0392b);
-    box-shadow: 0 0 8px rgba(231,76,60,0.6);
 }
-
 .c4-cell.yellow {
     background: radial-gradient(circle at 30% 30%, #f1c40f, #e67e22);
-    box-shadow: 0 0 8px rgba(241,196,15,0.6);
 }
 
-.c4-cell:hover {
-    transform: scale(1.05);
-    background: #3a4058;
+/* أنماط للألعاب الجديدة */
+.penalty-area {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+.penalty-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+}
+.goal-area {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+.goal-part {
+    width: 80px;
+    height: 120px;
+    background: #2c3e50;
+    border: 2px solid #e4b363;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+.f1-track {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+.f1-turn {
+    width: 60px;
+    height: 60px;
+    background: #2c3e50;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+.clicker-display {
+    font-size: 3rem;
+    text-align: center;
+    margin: 1rem;
+}
+.flag-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+.flag-btn {
+    background: #2c3e50;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
 }
 
-/* تنسيق زر الإعادة للعبة Connect 4 */
-.game-container[data-game="connect4"] #c4ResetBtn {
-    background: linear-gradient(95deg, #f1c40f, #e67e22);
-    color: #0a0c12;
-    margin-top: 1rem;
-    display: inline-flex;
-    margin-left: auto;
-    margin-right: auto;
+.footer-credit {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    color: #e4b363;
+    border-top: 1px solid rgba(228,179,99,0.3);
+    font-size: 0.9rem;
 }
 
-/* تنسيق شريط الحالة للعبة Connect 4 */
-.game-container[data-game="connect4"] .result-card {
-    background: rgba(241,196,15,0.2);
-    border: 1px solid #f1c40f;
-    color: #f1c40f;
+@media (max-width: 700px) {
+    .game-card { width: 100%; max-width: 280px; }
+    .lang-toggle { position: static; justify-content: center; margin-top: 1rem; }
+    .logo h1 { font-size: 2.2rem; }
+    .tabs-container { gap: 0.5rem; }
+    .tab-btn { padding: 0.3rem 0.8rem; font-size: 0.8rem; }
+    .ttt-board { grid-template-columns: repeat(3, minmax(60px, 80px)); }
+    .c4-cell { width: 40px; height: 40px; }
 }
