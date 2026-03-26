@@ -38,7 +38,7 @@ function initFootballQuiz() {
     ];
     major.forEach(q => questions.push({ ...q }));
 
-    // ========== 2. أسئلة عن اللاعبين (150 لاعب × 3 أسئلة = 450) ==========
+    // ========== 2. أسئلة عن اللاعبين (أكثر من 150 لاعب × 3 أسئلة) ==========
     const playersList = [
         { name: "محمد صلاح", club: "ليفربول", country: "مصر", position: "جناح" },
         { name: "ليونيل ميسي", club: "إنتر ميامي", country: "الأرجنتين", position: "مهاجم" },
@@ -156,7 +156,6 @@ function initFootballQuiz() {
         { name: "توني آدمز", club: "أرسنال", country: "إنجلترا", position: "مدافع" },
         { name: "ديدييه دروغبا", club: "تشيلسي", country: "كوت ديفوار", position: "مهاجم" },
         { name: "جون تيري", club: "تشيلسي", country: "إنجلترا", position: "مدافع" },
-        { name: "بتر تشيك", club: "تشيلسي", country: "التشيك", position: "حارس" },
         { name: "كلود ماكيليلي", club: "تشيلسي", country: "فرنسا", position: "وسط" },
         { name: "مايكل بالاك", club: "تشيلسي", country: "ألمانيا", position: "وسط" },
         { name: "أوزيبيو", club: "بنفيكا", country: "البرتغال", position: "مهاجم" },
@@ -170,127 +169,158 @@ function initFootballQuiz() {
         { name: "نيكولو باريلا", club: "إنتر ميلان", country: "إيطاليا", position: "وسط" },
     ];
 
-    // خيارات شائعة للأسئلة (نتجنب تكرار الإجابة الصحيحة كخيار خاطئ)
-    const commonClubs = ["برشلونة", "ريال مدريد", "مانشستر يونايتد", "ليفربول", "بايرن ميونخ", "باريس سان جيرمان"];
-    const commonCountries = ["إنجلترا", "البرازيل", "فرنسا", "إسبانيا", "ألمانيا", "إيطاليا"];
-    const commonPositions = ["مهاجم", "وسط", "مدافع", "حارس"];
+    // قوائم للخيارات العشوائية
+    const commonClubsAll = ["برشلونة", "ريال مدريد", "مانشستر يونايتد", "ليفربول", "بايرن ميونخ", "باريس سان جيرمان", "تشيلسي", "أرسنال", "يوفنتوس", "ميلان"];
+    const commonCountriesAll = ["إنجلترا", "البرازيل", "فرنسا", "إسبانيا", "ألمانيا", "إيطاليا", "الأرجنتين", "هولندا"];
+    const commonPositionsAll = ["مهاجم", "وسط", "مدافع", "حارس"];
 
     playersList.forEach(p => {
-        // سؤال النادي: نختار 3 أندية مختلفة عن النادي الصحيح
-        let clubOptions = [p.club];
-        let available = commonClubs.filter(c => c !== p.club);
-        while (clubOptions.length < 4 && available.length) {
-            let rand = available.splice(Math.floor(Math.random() * available.length), 1)[0];
-            clubOptions.push(rand);
+        // سؤال النادي
+        let clubOpts = [p.club];
+        let availableClubs = commonClubsAll.filter(c => c !== p.club);
+        while (clubOpts.length < 4 && availableClubs.length) {
+            let rand = availableClubs.splice(Math.floor(Math.random() * availableClubs.length), 1)[0];
+            clubOpts.push(rand);
         }
-        if (clubOptions.length < 4) clubOptions.push("أندية أخرى");
-        // خلط الخيارات
-        for (let i = clubOptions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [clubOptions[i], clubOptions[j]] = [clubOptions[j], clubOptions[i]];
-        }
-        const correctClubIndex = clubOptions.indexOf(p.club);
+        if (clubOpts.length < 4) clubOpts.push("نادٍ آخر");
+        shuffleArray(clubOpts);
         questions.push({
             text: `ما هو النادي الذي يلعب له ${p.name} حاليًا؟`,
-            options: clubOptions,
-            correct: correctClubIndex
+            options: clubOpts,
+            correct: clubOpts.indexOf(p.club)
         });
 
         // سؤال الجنسية
-        let countryOptions = [p.country];
-        let availableCountries = commonCountries.filter(c => c !== p.country);
-        while (countryOptions.length < 4 && availableCountries.length) {
+        let countryOpts = [p.country];
+        let availableCountries = commonCountriesAll.filter(c => c !== p.country);
+        while (countryOpts.length < 4 && availableCountries.length) {
             let rand = availableCountries.splice(Math.floor(Math.random() * availableCountries.length), 1)[0];
-            countryOptions.push(rand);
+            countryOpts.push(rand);
         }
-        if (countryOptions.length < 4) countryOptions.push("دولة أخرى");
-        for (let i = countryOptions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [countryOptions[i], countryOptions[j]] = [countryOptions[j], countryOptions[i]];
-        }
-        const correctCountryIndex = countryOptions.indexOf(p.country);
+        if (countryOpts.length < 4) countryOpts.push("دولة أخرى");
+        shuffleArray(countryOpts);
         questions.push({
             text: `ما هي جنسية ${p.name}؟`,
-            options: countryOptions,
-            correct: correctCountryIndex
+            options: countryOpts,
+            correct: countryOpts.indexOf(p.country)
         });
 
         // سؤال المركز
-        let posOptions = [p.position];
-        let availablePos = commonPositions.filter(pos => pos !== p.position);
-        while (posOptions.length < 4 && availablePos.length) {
+        let posOpts = [p.position];
+        let availablePos = commonPositionsAll.filter(pos => pos !== p.position);
+        while (posOpts.length < 4 && availablePos.length) {
             let rand = availablePos.splice(Math.floor(Math.random() * availablePos.length), 1)[0];
-            posOptions.push(rand);
+            posOpts.push(rand);
         }
-        if (posOptions.length < 4) posOptions.push("مركز آخر");
-        for (let i = posOptions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [posOptions[i], posOptions[j]] = [posOptions[j], posOptions[i]];
-        }
-        const correctPosIndex = posOptions.indexOf(p.position);
+        if (posOpts.length < 4) posOpts.push("مركز آخر");
+        shuffleArray(posOpts);
         questions.push({
             text: `ما هو المركز الأساسي للاعب ${p.name}؟`,
-            options: posOptions,
-            correct: correctPosIndex
+            options: posOpts,
+            correct: posOpts.indexOf(p.position)
         });
     });
 
-    // ========== 3. أسئلة عن الأندية (الملاعب والألقاب والتواريخ) ==========
+    // ========== 3. أسئلة عن الملاعب (مع ضمان وجود الإجابة الصحيحة) ==========
     const clubStadiums = {
-        "ليفربول": "أنفيلد", "مانشستر سيتي": "الاتحاد", "ريال مدريد": "سانتياغو برنابيو",
-        "برشلونة": "كامب نو", "بايرن ميونخ": "أليانز أرينا", "باريس سان جيرمان": "حديقة الأمراء",
-        "مانشستر يونايتد": "أولد ترافورد", "تشيلسي": "ستامفورد بريدج", "أرسنال": "الإمارات",
-        "توتنهام": "توتنهام هوتسبير", "يوفنتوس": "أليانز ستاديوم", "ميلان": "سان سيرو",
-        "إنتر ميلان": "سان سيرو", "أتلتيكو مدريد": "واندا ميتروبوليتانو", "بوروسيا دورتموند": "سيغنال إيدونا بارك",
-        "باير ليفركوزن": "باي أرينا", "نيوكاسل يونايتد": "سانت جيمس بارك", "أستون فيلا": "فيلا بارك",
-        "وست هام": "لندن", "إيفرتون": "غوديسون بارك", "نابولي": "دييغو أرماندو مارادونا",
-        "روما": "الأولمبيكو", "لاتسيو": "الأولمبيكو", "أولمبيك مارسيليا": "فيلودروم",
-        "ليون": "حديقة الأولمبية", "إشبيلية": "رامون سانشيز بيزخوان", "فالنسيا": "ميستايا",
-        "ريال بيتيس": "بينيتو فيامارين", "فياريال": "لا سيراميكا", "أياكس": "يوهان كرويف أرينا",
-        "بورتو": "الدراغاو", "بنفيكا": "الضوء", "سبورتينغ لشبونة": "جوزيه ألفالادي",
-        "غلطة سراي": "تورك تيليكوم أرينا", "فنربخشة": "شكري سراج أوغلو", "الهلال": "الملك فهد",
-        "النصر": "الأول بارك", "الأهلي": "مدينة الملك عبدالله الرياضية"
+        "ليفربول": "أنفيلد",
+        "مانشستر سيتي": "الاتحاد",
+        "ريال مدريد": "سانتياغو برنابيو",
+        "برشلونة": "كامب نو",
+        "بايرن ميونخ": "أليانز أرينا",
+        "باريس سان جيرمان": "حديقة الأمراء",
+        "مانشستر يونايتد": "أولد ترافورد",
+        "تشيلسي": "ستامفورد بريدج",
+        "أرسنال": "الإمارات",
+        "توتنهام": "توتنهام هوتسبير",
+        "يوفنتوس": "أليانز ستاديوم",
+        "ميلان": "سان سيرو",
+        "إنتر ميلان": "سان سيرو",
+        "أتلتيكو مدريد": "واندا ميتروبوليتانو",
+        "بوروسيا دورتموند": "سيغنال إيدونا بارك",
+        "باير ليفركوزن": "باي أرينا",
+        "نيوكاسل يونايتد": "سانت جيمس بارك",
+        "أستون فيلا": "فيلا بارك",
+        "وست هام": "لندن",
+        "إيفرتون": "غوديسون بارك",
+        "نابولي": "دييغو أرماندو مارادونا",
+        "روما": "الأولمبيكو",
+        "لاتسيو": "الأولمبيكو",
+        "أولمبيك مارسيليا": "فيلودروم",
+        "ليون": "حديقة الأولمبية",
+        "إشبيلية": "رامون سانشيز بيزخوان",
+        "فالنسيا": "ميستايا",
+        "ريال بيتيس": "بينيتو فيامارين",
+        "فياريال": "لا سيراميكا",
+        "أياكس": "يوهان كرويف أرينا",
+        "بورتو": "الدراغاو",
+        "بنفيكا": "الضوء",
+        "سبورتينغ لشبونة": "جوزيه ألفالادي",
+        "غلطة سراي": "تورك تيليكوم أرينا",
+        "فنربخشة": "شكري سراج أوغلو",
+        "الهلال": "الملك فهد",
+        "النصر": "الأول بارك",
+        "الأهلي": "مدينة الملك عبدالله الرياضية",
+        "الزمالك": "القاهرة الدولي",
+        "الوداد": "مركب محمد الخامس",
+        "الرجاء": "مركب محمد الخامس",
     };
-    const famousStadiums = ["أنفيلد", "كامب نو", "سانتياغو برنابيو", "أليانز أرينا", "أولد ترافورد", "الإمارات"];
-    for (let [club, stadium] of Object.entries(clubStadiums)) {
-        // نختار 3 ملاعب مختلفة عن الملعب الصحيح
-        let stadiumOptions = [stadium];
-        let available = famousStadiums.filter(s => s !== stadium);
-        while (stadiumOptions.length < 4 && available.length) {
-            let rand = available.splice(Math.floor(Math.random() * available.length), 1)[0];
-            stadiumOptions.push(rand);
+
+    // قائمة بجميع الملاعب المعروفة (للخيارات الخاطئة)
+    const allStadiums = [...new Set(Object.values(clubStadiums))];
+    for (let [club, correctStadium] of Object.entries(clubStadiums)) {
+        // نختار 3 ملاعب مختلفة عشوائياً من القائمة الكاملة، بشرط ألا يكونوا هم الملعب الصحيح
+        let wrongOptions = allStadiums.filter(s => s !== correctStadium);
+        // إذا لم يكن هناك عدد كافٍ، نضيف أسماء ملاعب إضافية
+        if (wrongOptions.length < 3) {
+            wrongOptions.push("ملعب أولمبي", "ملعب دولي", "ملعب العاصمة");
         }
-        if (stadiumOptions.length < 4) stadiumOptions.push("ملعب آخر");
-        for (let i = stadiumOptions.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [stadiumOptions[i], stadiumOptions[j]] = [stadiumOptions[j], stadiumOptions[i]];
-        }
-        const correctIndex = stadiumOptions.indexOf(stadium);
+        // نخلط ونأخذ أول 3
+        shuffleArray(wrongOptions);
+        let options = [correctStadium, ...wrongOptions.slice(0, 3)];
+        shuffleArray(options);
+        const correctIndex = options.indexOf(correctStadium);
         questions.push({
             text: `ما هو الملعب الرئيسي لنادي ${club}؟`,
-            options: stadiumOptions,
+            options: options,
             correct: correctIndex
         });
     }
 
-    // ألقاب الأندية
+    // ========== 4. ألقاب الأندية ==========
     const clubNicknames = {
-        "ليفربول": "الريدز", "مانشستر يونايتد": "الشياطين الحمر", "أرسنال": "المدفعجية",
-        "تشيلسي": "البلوز", "مانشستر سيتي": "السيتيزنز", "ريال مدريد": "الميرنغي",
-        "برشلونة": "البلوغرانا", "بايرن ميونخ": "الرومان", "يوفنتوس": "السيدة العجوز",
-        "ميلان": "الروسونيري", "إنتر ميلان": "النيراتزوري", "باريس سان جيرمان": "البي إس جي"
+        "ليفربول": "الريدز",
+        "مانشستر يونايتد": "الشياطين الحمر",
+        "أرسنال": "المدفعجية",
+        "تشيلسي": "البلوز",
+        "مانشستر سيتي": "السيتيزنز",
+        "ريال مدريد": "الميرنغي",
+        "برشلونة": "البلوغرانا",
+        "بايرن ميونخ": "الرومان",
+        "يوفنتوس": "السيدة العجوز",
+        "ميلان": "الروسونيري",
+        "إنتر ميلان": "النيراتزوري",
+        "باريس سان جيرمان": "البي إس جي",
+        "توتنهام": "السبيرز",
+        "إشبيلية": "الأندلسيون",
+        "أتلتيكو مدريد": "الروخيبلانكوس",
+        "بوروسيا دورتموند": "الأسود والأصفر"
     };
+    const allNicknames = [...new Set(Object.values(clubNicknames))];
     for (let [club, nickname] of Object.entries(clubNicknames)) {
-        const nickOptions = [nickname, "الريدز", "الميرنغي", "البلوغرانا"];
-        const correctIndex = nickOptions.indexOf(nickname);
+        let wrongNick = allNicknames.filter(n => n !== nickname);
+        shuffleArray(wrongNick);
+        let options = [nickname, ...wrongNick.slice(0, 3)];
+        shuffleArray(options);
+        const correctIndex = options.indexOf(nickname);
         questions.push({
             text: `ما هو لقب نادي ${club}؟`,
-            options: nickOptions,
+            options: options,
             correct: correctIndex
         });
     }
 
-    // ========== 4. أسئلة المنتخبات الوطنية ==========
+    // ========== 5. المنتخبات الوطنية ==========
     const nationalData = [
         { country: "البرازيل", worldCups: 5, topScorer: "بيليه", coach: "دوريفال جونيور" },
         { country: "ألمانيا", worldCups: 4, topScorer: "ميروسلاف كلوزه", coach: "يوليان ناغلسمان" },
@@ -305,24 +335,33 @@ function initFootballQuiz() {
         { country: "مصر", worldCups: 0, topScorer: "حسام حسن", coach: "حسام حسن" },
     ];
     nationalData.forEach(nt => {
+        // عدد مرات الفوز بكأس العالم
+        const cupOptions = [nt.worldCups.toString(), "1", "2", "3"];
+        shuffleArray(cupOptions);
         questions.push({
             text: `كم مرة فاز منتخب ${nt.country} بكأس العالم؟`,
-            options: [nt.worldCups.toString(), "1", "2", "3"],
-            correct: 0
+            options: cupOptions,
+            correct: cupOptions.indexOf(nt.worldCups.toString())
         });
+        // الهداف التاريخي
+        const scorerOptions = [nt.topScorer, "لاعب آخر", "نجم آخر", "مهاجم أسطوري"];
+        shuffleArray(scorerOptions);
         questions.push({
             text: `من هو الهداف التاريخي لمنتخب ${nt.country}؟`,
-            options: [nt.topScorer, "لاعب آخر", "نجم آخر", "مهاجم أسطوري"],
-            correct: 0
+            options: scorerOptions,
+            correct: scorerOptions.indexOf(nt.topScorer)
         });
+        // المدرب الحالي
+        const coachOptions = [nt.coach, "مدرب أجنبي", "مدرب محلي", "مدرب سابق"];
+        shuffleArray(coachOptions);
         questions.push({
             text: `من هو المدرب الحالي لمنتخب ${nt.country}؟`,
-            options: [nt.coach, "مدرب أجنبي", "مدرب محلي", "مدرب سابق"],
-            correct: 0
+            options: coachOptions,
+            correct: coachOptions.indexOf(nt.coach)
         });
     });
 
-    // ========== 5. أسئلة متنوعة (سجلات، حقائق) ==========
+    // ========== 6. أسئلة متنوعة (سجلات، حقائق) ==========
     const misc = [
         { text: "من هو صاحب الرقم القياسي في عدد المباريات الدولية (رجال)؟", options: ["كريستيانو رونالدو", "أحمد حسن", "بدر المطوع", "ليونيل ميسي"], correct: 0 },
         { text: "من هو اللاعب الوحيد الذي فاز بالكرة الذهبية 3 مرات متتالية؟", options: ["ميشيل بلاتيني", "ليونيل ميسي", "يوهان كرويف", "ماركو فان باستن"], correct: 0 },
@@ -335,10 +374,12 @@ function initFootballQuiz() {
         { text: "ما هو أكبر نادٍ من حيث عدد المشجعين في العالم؟", options: ["ريال مدريد", "مانشستر يونايتد", "برشلونة", "بايرن ميونخ"], correct: 0 },
         { text: "كم عدد الكرات الذهبية التي فاز بها ليونيل ميسي؟", options: ["8", "7", "6", "5"], correct: 0 },
         { text: "من هو أفضل حارس مرمى في تاريخ كأس العالم وفقًا لتصويت الفيفا؟", options: ["ليف ياشين", "مانويل نوير", "جيانلويجي بوفون", "إيكر كاسياس"], correct: 0 },
+        { text: "أي دولة فازت بأول بطولة كأس أمم أفريقيا؟", options: ["مصر", "غانا", "السودان", "إثيوبيا"], correct: 0 },
+        { text: "من هو الهداف التاريخي لكأس الأمم الأفريقية؟", options: ["صامويل إيتو", "ديدييه دروغبا", "رياض محرز", "محمد أبو تريكة"], correct: 0 },
     ];
     misc.forEach(q => questions.push({ ...q }));
 
-    // التأكد من أن لدينا أكثر من 500 سؤال
+    // ========== 7. إضافة أسئلة إضافية للتأكد من وصول العدد إلى 550+ ==========
     while (questions.length < 550) {
         questions.push({
             text: "ما هو اللقب الأكثر تتويجًا في كرة القدم الإنجليزية؟",
@@ -357,10 +398,7 @@ function initFootballQuiz() {
     const finalQuestions = Array.from(uniqueMap.values());
 
     // خلط الأسئلة عشوائياً
-    for (let i = finalQuestions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [finalQuestions[i], finalQuestions[j]] = [finalQuestions[j], finalQuestions[i]];
-    }
+    shuffleArray(finalQuestions);
 
     let currentIndex = 0;
     let score = 0;
@@ -382,7 +420,6 @@ function initFootballQuiz() {
                     document.getElementById('quizResult').innerHTML = `❌ خطأ! الإجابة الصحيحة: ${q.options[q.correct]}`;
                 }
                 document.getElementById('quizScore').innerHTML = `النقاط: ${score}`;
-                // تعطيل الأزرار بعد الإجابة
                 document.querySelectorAll('#quizOptions button').forEach(b => b.disabled = true);
             };
             optsDiv.appendChild(btn);
@@ -396,4 +433,12 @@ function initFootballQuiz() {
     };
 
     loadQuestion();
+
+    // دالة مساعدة لخلط المصفوفة
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
 }
