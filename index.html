@@ -23,95 +23,195 @@
         <div class="subhead" data-lang-key="tagline">مجموعة ألعاب جماعية ممتعة</div>
     </div>
 
+    <!-- Tabs -->
+    <div class="tabs-container">
+        <button class="tab-btn active" data-category="all" data-lang-key="tab_all">الكل</button>
+        <button class="tab-btn" data-category="football" data-lang-key="tab_football">⚽ كرة القدم</button>
+        <button class="tab-btn" data-category="f1" data-lang-key="tab_f1">🏎️ فورميلا 1</button>
+        <button class="tab-btn" data-category="gaming" data-lang-key="tab_gaming">🎮 جيمز</button>
+        <button class="tab-btn" data-category="flags" data-lang-key="tab_flags">🏳️ دول وأعلام</button>
+    </div>
+
     <div id="mainPage">
         <div class="games-grid">
-            <!-- الألعاب الموجودة (8) -->
-            <div class="game-card" data-game="mafia">
+            <!-- ========== الألعاب الموجودة (16) ========== -->
+            <div class="game-card" data-game="mafia" data-category="all">
                 <i class="fas fa-mask"></i>
                 <h3 data-lang-key="game_mafia">مافيا</h3>
                 <p data-lang-key="game_mafia_desc">لعبة الأدوار الكلاسيكية</p>
             </div>
-            <div class="game-card" data-game="dice">
+            <div class="game-card" data-game="dice" data-category="all">
                 <i class="fas fa-dice-d6"></i>
                 <h3 data-lang-key="game_dice">مباراة النرد</h3>
                 <p data-lang-key="game_dice_desc">نرد سريع للاعبين</p>
             </div>
-            <div class="game-card" data-game="truth">
+            <div class="game-card" data-game="truth" data-category="all">
                 <i class="fas fa-comment-dots"></i>
                 <h3 data-lang-key="game_truth">حقيقة أو جرأة</h3>
                 <p data-lang-key="game_truth_desc">أسئلة وأوامر عشوائية</p>
             </div>
-            <div class="game-card" data-game="rps">
+            <div class="game-card" data-game="rps" data-category="all">
                 <i class="fas fa-hand-rock"></i>
                 <h3 data-lang-key="game_rps">حجر ورقة مقص</h3>
                 <p data-lang-key="game_rps_desc">واجه الحاسوب</p>
             </div>
-            <div class="game-card" data-game="wyrm">
+            <div class="game-card" data-game="wyrm" data-category="all">
                 <i class="fas fa-question-circle"></i>
                 <h3 data-lang-key="game_wyrm">ماذا تفضل؟</h3>
                 <p data-lang-key="game_wyrm_desc">اختر بين خيارين</p>
             </div>
-            <div class="game-card" data-game="tictactoe">
+            <div class="game-card" data-game="tictactoe" data-category="all">
                 <i class="fas fa-grip-lines"></i>
                 <h3 data-lang-key="game_tictactoe">إكس أو</h3>
                 <p data-lang-key="game_tictactoe_desc">لعبة الكلاسيكية 3x3</p>
             </div>
-            <div class="game-card" data-game="connect4">
+            <div class="game-card" data-game="connect4" data-category="all">
                 <i class="fas fa-circle-dot"></i>
                 <h3 data-lang-key="game_connect4">أربع في خط</h3>
                 <p data-lang-key="game_connect4_desc">أربع علامات متتالية</p>
             </div>
-            <div class="game-card" data-game="memory">
+            <div class="game-card" data-game="memory" data-category="all">
                 <i class="fas fa-cards"></i>
                 <h3 data-lang-key="game_memory">تطابق الذاكرة</h3>
                 <p data-lang-key="game_memory_desc">طابق الأزواج المتشابهة</p>
             </div>
-
-            <!-- الألعاب الجديدة (8) -->
-            <div class="game-card" data-game="colormemory">
+            <div class="game-card" data-game="colormemory" data-category="all">
                 <i class="fas fa-palette"></i>
                 <h3 data-lang-key="game_colormemory">تحدي الذاكرة بالألوان</h3>
                 <p data-lang-key="game_colormemory_desc">تذكر تسلسل الألوان</p>
             </div>
-            <div class="game-card" data-game="quizrace">
+            <div class="game-card" data-game="quizrace" data-category="all">
                 <i class="fas fa-question-circle"></i>
                 <h3 data-lang-key="game_quizrace">سباق الأسئلة</h3>
                 <p data-lang-key="game_quizrace_desc">أسئلة عامة مع مؤقت</p>
             </div>
-            <div class="game-card" data-game="snakesladders">
+            <div class="game-card" data-game="snakesladders" data-category="all">
                 <i class="fas fa-chart-line"></i>
                 <h3 data-lang-key="game_snakesladders">السلم والثعبان</h3>
                 <p data-lang-key="game_snakesladders_desc">لعبة الألواح الكلاسيكية</p>
             </div>
-            <div class="game-card" data-game="speedclick">
+            <div class="game-card" data-game="speedclick" data-category="all">
                 <i class="fas fa-tachometer-alt"></i>
                 <h3 data-lang-key="game_speedclick">تحدي السرعة</h3>
                 <p data-lang-key="game_speedclick_desc">اضغط على الأهداف سريعاً</p>
             </div>
-            <div class="game-card" data-game="numbermatch">
+            <div class="game-card" data-game="numbermatch" data-category="all">
                 <i class="fas fa-calculator"></i>
                 <h3 data-lang-key="game_numbermatch">تطابق الأرقام</h3>
                 <p data-lang-key="game_numbermatch_desc">طابق العملية مع النتيجة</p>
             </div>
-            <div class="game-card" data-game="drawguess">
+            <div class="game-card" data-game="drawguess" data-category="all">
                 <i class="fas fa-paintbrush"></i>
                 <h3 data-lang-key="game_drawguess">ارسم وخمّن</h3>
                 <p data-lang-key="game_drawguess_desc">ارسم الكلمة ليخمنها الآخرون</p>
             </div>
-            <div class="game-card" data-game="wordchain">
+            <div class="game-card" data-game="wordchain" data-category="all">
                 <i class="fas fa-link"></i>
                 <h3 data-lang-key="game_wordchain">سلسلة الكلمات</h3>
                 <p data-lang-key="game_wordchain_desc">كلمة تبدأ بآخر حرف</p>
             </div>
-            <div class="game-card" data-game="monopoly">
+            <div class="game-card" data-game="monopoly" data-category="all">
                 <i class="fas fa-building"></i>
                 <h3 data-lang-key="game_monopoly">بنك الحظ</h3>
                 <p data-lang-key="game_monopoly_desc">نسخة مبسطة من مونوبولي</p>
             </div>
+
+            <!-- ========== ألعاب كرة القدم الجديدة ========== -->
+            <div class="game-card" data-game="penalty" data-category="football">
+                <i class="fas fa-futbol"></i>
+                <h3 data-lang-key="game_penalty">ركلات الترجيح</h3>
+                <p data-lang-key="game_penalty_desc">اختر اتجاه التسديدة وتحدى الحارس</p>
+            </div>
+            <div class="game-card" data-game="footballCoach" data-category="football">
+                <i class="fas fa-chalkboard-user"></i>
+                <h3 data-lang-key="game_footballCoach">مدرب الكرة</h3>
+                <p data-lang-key="game_footballCoach_desc">اتخذ القرارات التكتيكية في المباراة</p>
+            </div>
+            <div class="game-card" data-game="goalkeeper" data-category="football">
+                <i class="fas fa-hand-paper"></i>
+                <h3 data-lang-key="game_goalkeeper">حارس المرمى</h3>
+                <p data-lang-key="game_goalkeeper_desc">تصدى للكرات بسرعة</p>
+            </div>
+            <div class="game-card" data-game="footballTicTacToe" data-category="football">
+                <i class="fas fa-table"></i>
+                <h3 data-lang-key="game_footballTicTacToe">تيك تاك تو كروي</h3>
+                <p data-lang-key="game_footballTicTacToe_desc">أجب عن أسئلة كروية لتضع علامتك</p>
+            </div>
+            <div class="game-card" data-game="footballQuiz" data-category="football">
+                <i class="fas fa-question-circle"></i>
+                <h3 data-lang-key="game_footballQuiz">تحدي كرة القدم</h3>
+                <p data-lang-key="game_footballQuiz_desc">أسئلة ثقافية عن كرة القدم</p>
+            </div>
+
+            <!-- ========== ألعاب فورميلا 1 الجديدة ========== -->
+            <div class="game-card" data-game="f1TimeTrial" data-category="f1">
+                <i class="fas fa-stopwatch"></i>
+                <h3 data-lang-key="game_f1TimeTrial">سباق التوقيت</h3>
+                <p data-lang-key="game_f1TimeTrial_desc">انقر في الوقت المناسب لتحقق أسرع لفة</p>
+            </div>
+            <div class="game-card" data-game="f1Pitstop" data-category="f1">
+                <i class="fas fa-wrench"></i>
+                <h3 data-lang-key="game_f1Pitstop">استراتيجية الصيانة</h3>
+                <p data-lang-key="game_f1Pitstop_desc">قرر متى تدخل للصيانة لتحسين الترتيب</p>
+            </div>
+            <div class="game-card" data-game="f1MemoryRace" data-category="f1">
+                <i class="fas fa-brain"></i>
+                <h3 data-lang-key="game_f1MemoryRace">سباق الذاكرة</h3>
+                <p data-lang-key="game_f1MemoryRace_desc">تذكر تسلسل المنعطفات وأعده</p>
+            </div>
+            <div class="game-card" data-game="f1Quiz" data-category="f1">
+                <i class="fas fa-question-circle"></i>
+                <h3 data-lang-key="game_f1Quiz">تحدي فورميلا 1</h3>
+                <p data-lang-key="game_f1Quiz_desc">أسئلة عن الفورميلا 1</p>
+            </div>
+
+            <!-- ========== ألعاب الجيمز الجديدة ========== -->
+            <div class="game-card" data-game="guessGame" data-category="gaming">
+                <i class="fas fa-gamepad"></i>
+                <h3 data-lang-key="game_guessGame">خمن اللعبة</h3>
+                <p data-lang-key="game_guessGame_desc">خمن اسم اللعبة من الصورة أو الوصف</p>
+            </div>
+            <div class="game-card" data-game="characterMatch" data-category="gaming">
+                <i class="fas fa-users"></i>
+                <h3 data-lang-key="game_characterMatch">ترتيب الشخصيات</h3>
+                <p data-lang-key="game_characterMatch_desc">طابق بطاقات شخصيات الألعاب</p>
+            </div>
+            <div class="game-card" data-game="gamerQuiz" data-category="gaming">
+                <i class="fas fa-question-circle"></i>
+                <h3 data-lang-key="game_gamerQuiz">أسئلة الجيمر</h3>
+                <p data-lang-key="game_gamerQuiz_desc">أسئلة عن عالم الألعاب</p>
+            </div>
+            <div class="game-card" data-game="consoleClicker" data-category="gaming">
+                <i class="fas fa-mouse-pointer"></i>
+                <h3 data-lang-key="game_consoleClicker">محاكي كونسول</h3>
+                <p data-lang-key="game_consoleClicker_desc">انقر لتجميع نقاط التسلية</p>
+            </div>
+
+            <!-- ========== ألعاب دول وأعلام الجديدة ========== -->
+            <div class="game-card" data-game="guessFlag" data-category="flags">
+                <i class="fas fa-flag-checkered"></i>
+                <h3 data-lang-key="game_guessFlag">خمن العلم</h3>
+                <p data-lang-key="game_guessFlag_desc">اختر اسم الدولة من العلم</p>
+            </div>
+            <div class="game-card" data-game="matchCapitals" data-category="flags">
+                <i class="fas fa-city"></i>
+                <h3 data-lang-key="game_matchCapitals">تطابق العواصم</h3>
+                <p data-lang-key="game_matchCapitals_desc">طابق الدولة مع عاصمتها</p>
+            </div>
+            <div class="game-card" data-game="flagQuiz" data-category="flags">
+                <i class="fas fa-question-circle"></i>
+                <h3 data-lang-key="game_flagQuiz">تحدي الأعلام</h3>
+                <p data-lang-key="game_flagQuiz_desc">أسئلة عن الأعلام والدول</p>
+            </div>
+            <div class="game-card" data-game="flagRace" data-category="flags">
+                <i class="fas fa-bolt"></i>
+                <h3 data-lang-key="game_flagRace">سباق الأعلام</h3>
+                <p data-lang-key="game_flagRace_desc">اضغط على العلم المطلوب بسرعة</p>
+            </div>
         </div>
     </div>
 
-    <!-- حاويات الألعاب الموجودة -->
+    <!-- حاويات الألعاب الموجودة (16) -->
     <div id="mafiaGame" class="game-container"></div>
     <div id="diceGame" class="game-container"></div>
     <div id="truthGame" class="game-container"></div>
@@ -120,8 +220,6 @@
     <div id="tictactoeGame" class="game-container"></div>
     <div id="connect4Game" class="game-container"></div>
     <div id="memoryGame" class="game-container"></div>
-
-    <!-- حاويات الألعاب الجديدة -->
     <div id="colormemoryGame" class="game-container"></div>
     <div id="quizraceGame" class="game-container"></div>
     <div id="snakesladdersGame" class="game-container"></div>
@@ -131,12 +229,31 @@
     <div id="wordchainGame" class="game-container"></div>
     <div id="monopolyGame" class="game-container"></div>
 
+    <!-- حاويات الألعاب الجديدة -->
+    <div id="penaltyGame" class="game-container"></div>
+    <div id="footballCoachGame" class="game-container"></div>
+    <div id="goalkeeperGame" class="game-container"></div>
+    <div id="footballTicTacToeGame" class="game-container"></div>
+    <div id="footballQuizGame" class="game-container"></div>
+    <div id="f1TimeTrialGame" class="game-container"></div>
+    <div id="f1PitstopGame" class="game-container"></div>
+    <div id="f1MemoryRaceGame" class="game-container"></div>
+    <div id="f1QuizGame" class="game-container"></div>
+    <div id="guessGameGame" class="game-container"></div>
+    <div id="characterMatchGame" class="game-container"></div>
+    <div id="gamerQuizGame" class="game-container"></div>
+    <div id="consoleClickerGame" class="game-container"></div>
+    <div id="guessFlagGame" class="game-container"></div>
+    <div id="matchCapitalsGame" class="game-container"></div>
+    <div id="flagQuizGame" class="game-container"></div>
+    <div id="flagRaceGame" class="game-container"></div>
+
     <div class="footer-credit">
         <i class="fas fa-code"></i> برمجة وتصميم <strong>Momo</strong>
     </div>
 </div>
 
-<script src="main.js"></script>
+<!-- الألعاب الموجودة -->
 <script src="mafia.js"></script>
 <script src="truthDare.js"></script>
 <script src="dice.js"></script>
@@ -153,5 +270,26 @@
 <script src="drawGuess.js"></script>
 <script src="wordChain.js"></script>
 <script src="monopoly.js"></script>
+
+<!-- الألعاب الجديدة -->
+<script src="penalty.js"></script>
+<script src="footballCoach.js"></script>
+<script src="goalkeeper.js"></script>
+<script src="footballTicTacToe.js"></script>
+<script src="footballQuiz.js"></script>
+<script src="f1TimeTrial.js"></script>
+<script src="f1Pitstop.js"></script>
+<script src="f1MemoryRace.js"></script>
+<script src="f1Quiz.js"></script>
+<script src="guessGame.js"></script>
+<script src="characterMatch.js"></script>
+<script src="gamerQuiz.js"></script>
+<script src="consoleClicker.js"></script>
+<script src="guessFlag.js"></script>
+<script src="matchCapitals.js"></script>
+<script src="flagQuiz.js"></script>
+<script src="flagRace.js"></script>
+
+<script src="main.js"></script>
 </body>
 </html>
