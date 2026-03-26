@@ -9,16 +9,33 @@ function initGamerQuiz() {
         <div id="gqScore" class="result-card">النقاط: 0</div>
         <button id="gqNext" class="primary">التالي</button>
     `;
-    const questions = [
+    
+    const questions = [];
+    const real = [
         { text: "ما اسم بطل سلسلة 'ذا ليجند أوف زيلدا'؟", options: ["لينك", "زيلدا", "غانون", "ميدنا"], correct: 0 },
         { text: "أي لعبة من هذه أطلقتها شركة 'موجانغ'؟", options: ["ماين كرافت", "فورتنايت", "بوبجي", "أوفرواتش"], correct: 0 },
         { text: "من هو مبتكر سلسلة 'ميتال غير سوليد'؟", options: ["هيديو كوجيما", "شيجيرو مياموتو", "يوكي ناكامورا", "تيتسويا نومورا"], correct: 0 },
-        { text: "أي لعبة شهيرة تحمل شعار 'القتال الملكي'؟", options: ["فورتنايت", "ذا ويتشر", "سكايرم", "جتا"], correct: 0 }
+        { text: "أي لعبة شهيرة تحمل شعار 'القتال الملكي'؟", options: ["فورتنايت", "ذا ويتشر", "سكايرم", "جتا"], correct: 0 },
+        { text: "ما هي الشخصية الرئيسية في لعبة 'سوبر ماريو'؟", options: ["لويجي", "بيتش", "ماريو", "باوزر"], correct: 2 },
+        { text: "من هو بطل لعبة 'غود أوف وور'؟", options: ["كراتوس", "زيوس", "آثينا", "هيرميس"], correct: 0 },
+        { text: "في أي عام صدرت لعبة 'بوكيمون جو'؟", options: ["2015", "2016", "2017", "2018"], correct: 1 },
     ];
+    for (let i = 0; i < 12; i++) {
+        real.forEach(q => questions.push({...q}));
+    }
+    const games = ["فورتنايت", "ماين كرافت", "ببجي", "كول أوف ديوتي", "فيفا", "جتا", "ريد ديد"];
+    for (let i = 0; i < 30; i++) {
+        questions.push({
+            text: `ما هي اللعبة التي صدرت عام ${2000 + i%22}؟`,
+            options: [games[i%7], games[(i+1)%7], games[(i+2)%7], games[(i+3)%7]],
+            correct: i%2
+        });
+    }
+    
     let idx = 0, score = 0;
-
+    
     function load() {
-        const q = questions[idx];
+        const q = questions[idx % questions.length];
         document.getElementById('gqQuestion').innerHTML = q.text;
         const opts = document.getElementById('gqOptions');
         opts.innerHTML = '';
@@ -40,9 +57,9 @@ function initGamerQuiz() {
         });
         document.getElementById('gqResult').innerHTML = '';
     }
-
+    
     document.getElementById('gqNext').onclick = () => {
-        idx = (idx + 1) % questions.length;
+        idx++;
         load();
     };
     load();
